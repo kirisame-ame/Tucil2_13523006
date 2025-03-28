@@ -1,0 +1,30 @@
+#ifndef METRICS_HPP
+#define METRICS_HPP
+#include <cmath>
+#include <vector>
+#include <array>
+#include <numeric>
+using namespace std;
+using RGB = array<vector<int>, 3>;
+// Variance of a vector of integers
+double variance(const vector<int>& values);
+// Color Variance from 3xN matrix of integers
+// where N is the number of pixels and each row is a color channel r,g,b
+double colorVariance(const RGB& values);
+// Mean Absolute Deviation of a vector of integers
+double meanAbsDev(const vector<int>& values);
+// Mean Absolute Deviation of a 3xN matrix of integers
+// where N is the number of pixels and each row is a color channel r,g,b
+double colorMeanAbsDev(const RGB& values);
+// Max Pixel Difference of a vector of integers
+int maxPixelDiff(const vector<int>& values);
+// Max Pixel Difference of a 3xN matrix of integers
+// where N is the number of pixels and each row is a color channel r,g,b
+int colorMaxPixelDiff(const RGB& values);
+// Entropy of a vector of integers
+double entropy(const vector<int>& values);
+// Entropy of a 3xN matrix of integers
+// where N is the number of pixels and each row is a color channel r,g,b
+double colorEntropy(const RGB& values);
+
+#endif

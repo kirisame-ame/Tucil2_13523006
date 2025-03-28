@@ -1,0 +1,2 @@
+add_library(ImageCompressorLib ImageCompressor/ImageCompressor.cpp)
+target_include_directories(ImageCompressorLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ImageCompressor)
