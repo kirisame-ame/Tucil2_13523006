@@ -6,6 +6,9 @@
 #include <numeric>
 using namespace std;
 using RGB = array<vector<int>, 3>;
+// Mean Colors of a 3xN matrix of integers
+// where N is the number of pixels and each row is a color channel r,g,b
+array<int,3> meanColor(const RGB& values);
 // Variance of a vector of integers
 double variance(const vector<int>& values);
 // Color Variance from 3xN matrix of integers

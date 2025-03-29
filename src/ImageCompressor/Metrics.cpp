@@ -1,9 +1,28 @@
 #include "Metrics.hpp"
 #include <cmath>
 #include <vector>
+#include <iostream>
 using namespace std;
 using RGB = array<vector<int>, 3>;
 
+array<int,3> meanColor(const RGB& values){
+    vector<int> r = values[0];
+    vector<int> g = values[1];
+    vector<int> b = values[2];
+    int size = r.size();
+    int meanR = 0;
+    int meanG = 0;
+    int meanB = 0;
+    for(int i = 0; i < size; i++){
+        meanR += r[i];
+        meanG += g[i];
+        meanB += b[i];
+    }
+    meanR /= size;
+    meanG /= size;
+    meanB /= size;
+    return {meanR,meanG,meanB};
+}
 double variance(const vector<int>& values){
     int size = values.size();
     double mean = 0;
