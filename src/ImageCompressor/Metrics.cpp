@@ -23,13 +23,8 @@ array<int,3> meanColor(const RGB& values){
     meanB /= size;
     return {meanR,meanG,meanB};
 }
-double variance(const vector<int>& values){
+double variance(const vector<int>& values,double mean){
     int size = values.size();
-    double mean = 0;
-    for(int i = 0; i < size; i++){
-        mean += values[i];
-    }
-    mean /= size;
     double variance = 0;
     for(int i = 0; i < size; i++){
         variance += pow(values[i] - mean, 2);
@@ -37,19 +32,14 @@ double variance(const vector<int>& values){
     variance /= size;
     return variance;
 }
-double colorVariance(const RGB& values){
+double colorVariance(const RGB& values,array<int,3> meanColors){
     vector<int> r = values[0];
     vector<int> g = values[1];
     vector<int> b = values[2];
-    return (variance(r) + variance(g) + variance(b))/3;
+    return (variance(r,meanColors[0]) + variance(g,meanColors[1]) + variance(b,meanColors[2]))/3;
 }
-double meanAbsDev(const vector<int>& values){
+double meanAbsDev(const vector<int>& values,double mean){
     int size = values.size();
-    double mean = 0;
-    for(int i = 0; i < size; i++){
-        mean += values[i];
-    }
-    mean /= size;
     double mad = 0;
     for(int i = 0; i < size; i++){
         mad += abs(values[i] - mean);
@@ -57,11 +47,11 @@ double meanAbsDev(const vector<int>& values){
     mad /= size;
     return mad;
 }
-double colorMeanAbsDev(const RGB& values){
+double colorMeanAbsDev(const RGB& values,array<int,3> meanColors){
     vector<int> r = values[0];
     vector<int> g = values[1];
     vector<int> b = values[2];
-    return (meanAbsDev(r) + meanAbsDev(g) + meanAbsDev(b))/3;
+    return (meanAbsDev(r,meanColors[0]) + meanAbsDev(g,meanColors[1]) + meanAbsDev(b,meanColors[2]))/3;
 }
 int maxPixelDiff(const vector<int>& values){
     int max = 0;
@@ -104,4 +94,43 @@ double colorEntropy(const RGB& values){
     vector<int> g = values[1];
     vector<int> b = values[2];
     return (entropy(r) + entropy(g) + entropy(b))/3;
+}
+// Checks if the error metric is above the threshold to split the quadtree
+bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<int,3>& meanColors) {
+    double error;
+    switch (runParams.errorMetric) {
+        case 1:
+            error = colorVariance(pixels,meanColors);
+            break;
+        case 2:
+            error = colorMeanAbsDev(pixels,meanColors);
+            break;
+        case 3:
+            error = colorMaxPixelDiff(pixels);
+            break;
+        case 4:
+            error = colorEntropy(pixels);
+            break;
+        default:
+            cout << "Invalid Error Metric" << endl;
+            return false;
+    }
+    return error > runParams.threshold;
+}
+RGB getRGB(const Magick::Image& image) {
+    int width = image.columns();
+    int height = image.rows();
+    RGB pixels;
+    pixels[0].resize(width * height);
+    pixels[1].resize(width * height);
+    pixels[2].resize(width * height);
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            Magick::ColorRGB color = image.pixelColor(x, y);
+            pixels[0][y * width + x] = (color.red()*255);
+            pixels[1][y * width + x] = (color.green()*255);
+            pixels[2][y * width + x] = (color.blue()*255);
+        }
+    }
+    return pixels;
 }

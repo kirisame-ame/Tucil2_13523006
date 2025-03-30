@@ -9,9 +9,11 @@
 using namespace std;
 
 RunParams runParams;
+// Program entry point wrapper function
 void run(){
     startView();
     paramsInput();
+    compressImage(runParams);
 }
 void startView(){
     bool isValid = false;
@@ -24,6 +26,7 @@ void startView(){
             cout << "File exists" << endl;
             Magick::Image image(imagePath);
             runParams.image = image;
+            runParams.fileSize = filesystem::file_size(imagePath);
             isValid = true;
         } else {
             cout << "File does not exist" << endl;
@@ -33,16 +36,64 @@ void startView(){
 }
 void paramsInput(){
     cout << "Enter the parameters for the quadtree compression" << endl;
+    metricInput();
+    thresholdInput();
+    minBlockInput();
+}
+void metricInput(){
+    bool isValid = false;
     cout << "Enter the Error Metric you would like to use :" << endl;
-    int maxDepth;
-    cin >> maxDepth;
-    cout << "Enter the split threshold :" << endl;
-    int minSize;
-    cin >> minSize;
-    cout << "Enter the minimum block size for a split :" << endl;
-    int maxSize;
-    cin >> maxSize;
+    cout<< "1. Variance" << endl;
+    cout<< "2. Mean Absolute Deviation" << endl;
+    cout<< "3. Max Pixel Difference" << endl;
+    cout<< "4. Entropy" << endl;
+    cout<< "5. Structural Similarity Index (SSIM)" << endl;
+    int metric;
+    while(!isValid) {
+        cin >> metric;
+        if (metric < 1 || metric > 5) {
+            cout << "Invalid metric. Please enter a number between 1 and 5." << endl;
+        } else {
+            isValid = true;
+            runParams.errorMetric = metric;
+        }
+    }
+}
+void thresholdInput(){
+    bool isValid = false;
+    cout << "Enter the threshold value for the quadtree compression" << endl;
+    double threshold;
+    while(!isValid) {
+        cin >> threshold;
+        if (threshold < 0) {
+            cout << "Invalid threshold. Please enter a positive number" << endl;
+        } else {
+            isValid = true;
+            runParams.threshold = threshold;
+        }
+    }
+}
+void minBlockInput(){
+    bool isValid = false;
+    cout << "Enter the minimum block size for the quadtree compression" << endl;
+    int minBlock;
+    while(!isValid) {
+        cin >> minBlock;
+        if (minBlock < 1) {
+            cout << "Invalid minimum block size. Please enter a positive integer" << endl;
+        } else {
+            isValid = true;
+            runParams.minBlock = minBlock;
+        }
+    }
+}
+void startCompression(){
+    cout << "Starting compression..." << endl;
+    
 }
 void saveImage(const Magick::Image& image, const string& path) {
     cout << "Image saved to " << path << endl;
+}
+void saveGif(const Magick::Image& image, const string& path) {
+    cout << "GIF saved to " << path << endl;
 }

@@ -1,8 +1,5 @@
 #include <iostream>
 #include <Magick++.h>
-#include <ImageCompressor.hpp>
-#include <Quadtree.hpp>
-#include <Metrics.hpp>
 #include <View.hpp>
 using namespace std;
 using namespace Magick;

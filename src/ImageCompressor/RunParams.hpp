@@ -5,6 +5,7 @@ struct RunParams
 {
     Magick::Image image;
     double threshold;
+    int fileSize;
     int minBlock;
     int errorMetric;
 };
