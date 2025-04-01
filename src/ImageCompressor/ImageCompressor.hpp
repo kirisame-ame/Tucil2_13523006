@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <time.h>
 #include <array>
 #include <Metrics.hpp>
 #include <Quadtree.hpp>

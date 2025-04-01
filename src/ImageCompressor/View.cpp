@@ -27,6 +27,9 @@ void startView(){
             Magick::Image image(imagePath);
             runParams.image = image;
             runParams.fileSize = filesystem::file_size(imagePath);
+            runParams.imageName = filesystem::path(imagePath).stem().string();
+            runParams.imageWidth = image.columns();
+            runParams.imageHeight = image.rows();
             isValid = true;
         } else {
             cout << "File does not exist" << endl;
