@@ -95,7 +95,6 @@ double colorEntropy(const RGB& values){
     vector<int> b = values[2];
     return (entropy(r) + entropy(g) + entropy(b))/3;
 }
-// Checks if the error metric is above the threshold to split the quadtree
 bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<int,3>& meanColors) {
     double error;
     switch (runParams.errorMetric) {

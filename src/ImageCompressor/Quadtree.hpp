@@ -32,6 +32,6 @@ public:
     // Get isLeaf of current node
     bool getIsLeaf();
     void buildQuadtree(const RunParams& runParams,int x,int y,int width,int height,int depth,RGB& imgPix);
-    void constructImage(unsigned char *output,int imgWidth);
+    void constructImage(unsigned char *output,int imgWidth, int *maxDepth,int *nodeCount);
 };
 #endif

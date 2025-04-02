@@ -10,7 +10,7 @@ struct RunParams
     int imageHeight;
     int minBlock;
     int errorMetric;
-    std::string imageName;
+    std::string outputPath;
     std::string extension;
 };
 #endif

@@ -29,11 +29,19 @@ void startView(){
         if (filesystem::exists(imagePath)) {
             cout << "File exists" << endl;
             runParams.fileSize = filesystem::file_size(imagePath);
-            runParams.imageName = filesystem::path(imagePath).stem().string();
             runParams.imageBuffer = stbi_load(imagePath.c_str(), &runParams.imageWidth, &runParams.imageHeight, NULL, 3);
             runParams.extension = filesystem::path(imagePath).extension().string();
             isValid = true;
             cout << "Image loaded successfully" << endl;
+            cout << "Enter Absolute File Path to save the compressed image" << endl;
+            cout <<"Or press Enter to save in the output directory: " << endl;
+            string outputPath;
+            cin >> outputPath;
+            if (outputPath.empty()) {
+                runParams.outputPath = "output/"+filesystem::path(imagePath).stem().string()+"_compressed" + runParams.extension;
+            } else {
+                runParams.outputPath = outputPath + runParams.extension;
+            }
         } else {
             cout << "File does not exist" << endl;
             cout << "Please enter a valid file path :" << endl;

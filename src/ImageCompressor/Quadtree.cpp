@@ -49,7 +49,13 @@ void Quadtree::buildQuadtree(const RunParams& runParams,int x,int y,int width,in
         this->br = nullptr;
     }
 }
-void Quadtree::constructImage(unsigned char* output,int imgWidth) {
+void Quadtree::constructImage(unsigned char* output,int imgWidth, int *maxDepth,int *nodeCount) {
+    if (maxDepth) {
+        *maxDepth = max(*maxDepth, depth);
+    }
+    if (nodeCount) {
+        (*nodeCount)++;
+    }
     if (isLeaf) {
         int x = position[0];
         int y = position[1];
@@ -61,9 +67,9 @@ void Quadtree::constructImage(unsigned char* output,int imgWidth) {
             }
         }
     } else {
-        if (tl) tl->constructImage(output,imgWidth);
-        if (tr) tr->constructImage(output,imgWidth);
-        if (bl) bl->constructImage(output,imgWidth);
-        if (br) br->constructImage(output,imgWidth);
+        if (tl) tl->constructImage(output,imgWidth, maxDepth,nodeCount);
+        if (tr) tr->constructImage(output,imgWidth, maxDepth,nodeCount);
+        if (bl) bl->constructImage(output,imgWidth, maxDepth,nodeCount);
+        if (br) br->constructImage(output,imgWidth, maxDepth,nodeCount);
     }
 }

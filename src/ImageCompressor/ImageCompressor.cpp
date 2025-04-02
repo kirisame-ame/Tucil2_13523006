@@ -28,7 +28,10 @@ void compressImage(const RunParams& runParams) {
         auto duration = chrono::duration_cast<chrono::milliseconds>(end - start).count();
         cout << "Quadtree built in " << duration << " ms" << endl;
         // Save the compressed image
-        string outputPath = "C:/Users/jason/Documents/Code/Tucil2_13523006/tests/"+runParams.imageName+"_compressed"+runParams.extension;
+        string outputPath = runParams.outputPath;
+        if (filesystem::exists(outputPath)) {
+            cout << "File already exists. Overwriting..." << endl;
+        }
         saveCompressedImage(root, outputPath, width, height,runParams.extension,runParams.fileSize);
     } else {
         cout << "Image can't be compressed more." << endl;
@@ -37,7 +40,9 @@ void compressImage(const RunParams& runParams) {
 }
 void saveCompressedImage(const unique_ptr<Quadtree>& root, const string& path,int width, int height,string extension,double origSize) {
     unsigned char* output = new unsigned char[width * height * 3];
-    root->constructImage(output, width);
+    int maxDepth;
+    int nodeCount = 0;
+    root->constructImage(output, width, &maxDepth, &nodeCount);
     if (extension == ".png") {
         stbi_write_png(path.c_str(), width, height, 3, output, width * 3);
     } else if (extension == ".jpg" || extension == ".jpeg") {
@@ -52,6 +57,8 @@ void saveCompressedImage(const unique_ptr<Quadtree>& root, const string& path,in
     cout<<"Original image size: " << origSize << " KB" << endl;
     cout << "Compressed image size: " << fileSize << " KB" << endl;
     cout<<"Compression Percentage: "<<(1-(fileSize/origSize))*100<<"%"<<endl;
+    cout<<"Quadtree Depth: "<<maxDepth<<endl;
+    cout<<"Node Count: "<<nodeCount<<endl;
     cout << "Compressed image saved to " << path << endl;
 }
 
