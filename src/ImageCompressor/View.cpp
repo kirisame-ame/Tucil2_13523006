@@ -3,9 +3,13 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
-#include <Magick++.h>
 #include <ImageCompressor.hpp>
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <stb_image.h>
+#include <stb_image_write.h>
 #include <RunParams.hpp>
+
 using namespace std;
 
 RunParams runParams;
@@ -13,7 +17,7 @@ RunParams runParams;
 void run(){
     startView();
     paramsInput();
-    compressImage(runParams);
+    startCompression();
 }
 void startView(){
     bool isValid = false;
@@ -24,13 +28,12 @@ void startView(){
         cin >> imagePath;
         if (filesystem::exists(imagePath)) {
             cout << "File exists" << endl;
-            Magick::Image image(imagePath);
-            runParams.image = image;
             runParams.fileSize = filesystem::file_size(imagePath);
             runParams.imageName = filesystem::path(imagePath).stem().string();
-            runParams.imageWidth = image.columns();
-            runParams.imageHeight = image.rows();
+            runParams.imageBuffer = stbi_load(imagePath.c_str(), &runParams.imageWidth, &runParams.imageHeight, NULL, 3);
+            runParams.extension = filesystem::path(imagePath).extension().string();
             isValid = true;
+            cout << "Image loaded successfully" << endl;
         } else {
             cout << "File does not exist" << endl;
             cout << "Please enter a valid file path :" << endl;
@@ -92,11 +95,5 @@ void minBlockInput(){
 }
 void startCompression(){
     cout << "Starting compression..." << endl;
-    
-}
-void saveImage(const Magick::Image& image, const string& path) {
-    cout << "Image saved to " << path << endl;
-}
-void saveGif(const Magick::Image& image, const string& path) {
-    cout << "GIF saved to " << path << endl;
+    compressImage(runParams);
 }

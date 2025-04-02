@@ -5,7 +5,6 @@
 #include <array>
 #include <vector>
 #include <RunParams.hpp>
-#include <Magick++.h>
 #include <Metrics.hpp>
 using namespace std;
 
@@ -33,6 +32,6 @@ public:
     // Get isLeaf of current node
     bool getIsLeaf();
     void buildQuadtree(const RunParams& runParams,int x,int y,int width,int height,int depth,RGB& imgPix);
-    void constructImage(Magick::Image &output);
+    void constructImage(unsigned char *output,int imgWidth);
 };
 #endif

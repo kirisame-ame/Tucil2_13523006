@@ -49,14 +49,21 @@ void Quadtree::buildQuadtree(const RunParams& runParams,int x,int y,int width,in
         this->br = nullptr;
     }
 }
-void Quadtree::constructImage(Magick::Image &output) {
+void Quadtree::constructImage(unsigned char* output,int imgWidth) {
     if (isLeaf) {
-        output.fillColor(Magick::ColorRGB(color[0]/255.0, color[1]/255.0, color[2]/255.0));
-        output.draw(Magick::DrawableRectangle(position[0], position[1], position[0] + size[0]-1, position[1] + size[1]-1));
+        int x = position[0];
+        int y = position[1];
+        for (int i = 0; i < size[1]; ++i) {
+            for (int j = 0; j < size[0]; ++j) {
+                output[((y + i) * imgWidth + (x + j)) * 3] = color[0];
+                output[((y + i) * imgWidth + (x + j)) * 3 + 1] = color[1];
+                output[((y + i) * imgWidth + (x + j)) * 3 + 2] = color[2];
+            }
+        }
     } else {
-        if (tl) tl->constructImage(output);
-        if (tr) tr->constructImage(output);
-        if (bl) bl->constructImage(output);
-        if (br) br->constructImage(output);
+        if (tl) tl->constructImage(output,imgWidth);
+        if (tr) tr->constructImage(output,imgWidth);
+        if (bl) bl->constructImage(output,imgWidth);
+        if (br) br->constructImage(output,imgWidth);
     }
 }

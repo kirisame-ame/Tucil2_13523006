@@ -5,7 +5,6 @@
 #include <array>
 #include <numeric>
 #include <RunParams.hpp>
-#include <Magick++.h>
 using namespace std;
 using RGB = array<vector<int>, 3>;
 // Mean Colors of a 3xN matrix of integers
@@ -32,6 +31,6 @@ double entropy(const vector<int>& values);
 // where N is the number of pixels and each row is a color channel r,g,b
 double colorEntropy(const RGB& values);
 bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<int,3>& meanColors);
-RGB getRGB(const Magick::Image& image);
+RGB getRGB(const unsigned char *imgBuf ,int width, int height);
 
 #endif

@@ -117,19 +117,16 @@ bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<in
     }
     return error > runParams.threshold;
 }
-RGB getRGB(const Magick::Image& image) {
-    int width = image.columns();
-    int height = image.rows();
+RGB getRGB(const unsigned char* imgBuf,int width, int height) {
     RGB pixels;
     pixels[0].resize(width * height);
     pixels[1].resize(width * height);
     pixels[2].resize(width * height);
-    for (int y = 0; y < height; ++y) {
-        for (int x = 0; x < width; ++x) {
-            Magick::ColorRGB color = image.pixelColor(x, y);
-            pixels[0][y * width + x] = (color.red()*255);
-            pixels[1][y * width + x] = (color.green()*255);
-            pixels[2][y * width + x] = (color.blue()*255);
+    for (int i = 0; i < height; ++i) {
+        for (int j = 0; j < width; ++j) {
+            pixels[0][i * width + j] = imgBuf[(i * width + j) * 3];
+            pixels[1][i * width + j] = imgBuf[(i * width + j) * 3 + 1];
+            pixels[2][i * width + j] = imgBuf[(i * width + j) * 3 + 2];
         }
     }
     return pixels;

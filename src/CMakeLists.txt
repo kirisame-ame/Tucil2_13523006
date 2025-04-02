@@ -7,9 +7,7 @@ add_library(ImageCompressorLib
     ImageCompressor/Quadtree.hpp
     ImageCompressor/View.cpp
     ImageCompressor/View.hpp
-    ImageCompressor/RunParams.hpp)
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(IMAGEMAGICK REQUIRED Magick++)
-add_definitions(-DMAGICKCORE_QUANTUM_DEPTH=8 -DMAGICKCORE_HDRI_ENABLE=0)
-target_include_directories(ImageCompressorLib PRIVATE ${IMAGEMAGICK_INCLUDE_DIRS})
+    ImageCompressor/RunParams.hpp
+    ImageCompressor/stb_image.h
+    ImageCompressor/stb_image_write.h)
 target_include_directories(ImageCompressorLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/ImageCompressor)

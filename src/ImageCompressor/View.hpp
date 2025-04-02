@@ -4,8 +4,9 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
-#include <Magick++.h>
 #include <ImageCompressor.hpp>
+#include <stb_image.h>
+#include <stb_image_write.h>
 #include <RunParams.hpp>
 using namespace std;
 
@@ -16,7 +17,5 @@ void metricInput();
 void thresholdInput();
 void minBlockInput();
 void startCompression();
-void saveImage(const Magick::Image& image, const string& path);
-void saveGif(const Magick::Image& image, const string& path);
 
 #endif

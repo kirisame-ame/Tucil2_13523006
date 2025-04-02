@@ -1,9 +1,9 @@
 #ifndef RUNPARAMS_HPP
 #define RUNPARAMS_HPP
-#include <Magick++.h>
+#include <string>
 struct RunParams
 {
-    Magick::Image image;
+    unsigned char* imageBuffer;
     double threshold;
     int fileSize;
     int imageWidth;
@@ -11,5 +11,6 @@ struct RunParams
     int minBlock;
     int errorMetric;
     std::string imageName;
+    std::string extension;
 };
 #endif
