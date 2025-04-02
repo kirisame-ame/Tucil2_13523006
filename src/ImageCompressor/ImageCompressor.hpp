@@ -10,6 +10,7 @@
 #include <Metrics.hpp>
 #include <Quadtree.hpp>
 #include <RunParams.hpp>
+#include <stb_image_write.h>
 using namespace std;
 using RGB = array<vector<int>, 3>;
 

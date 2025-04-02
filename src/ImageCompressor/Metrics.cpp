@@ -2,6 +2,7 @@
 #include <cmath>
 #include <vector>
 #include <iostream>
+#include <RunParams.hpp>
 using namespace std;
 using RGB = array<vector<int>, 3>;
 
@@ -95,7 +96,37 @@ double colorEntropy(const RGB& values){
     vector<int> b = values[2];
     return (entropy(r) + entropy(g) + entropy(b))/3;
 }
-bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<int,3>& meanColors) {
+double singleSsim(const vector<int>& origImg, double mean1, double mean2) {
+    double c1 = 6.5025, c2 = 58.5225;
+    double origImgVar = variance(origImg, mean1);
+    // Covariance is zero since newImg's pixels are all the same
+    // Variance of newImg is zero since newImg's pixels are all the same
+    return (2 * mean1 * mean2 + c1) * c2 / ((mean1 * mean1 + mean2 * mean2 + c1) * (origImgVar + c2));
+}
+double ssim(const RGB& origImg,const array<int,3>& meanColors,int index,int size) {
+    double c1 = 6.5025, c2 = 58.5225;
+    
+    double sumR = 0, sumG = 0, sumB = 0;
+    double sumSqR = 0, sumSqG = 0, sumSqB = 0;
+
+    for (int i = index; i < index + size; ++i) {
+        sumR += origImg[0][i]; sumSqR += origImg[0][i] * origImg[0][i];
+        sumG += origImg[1][i]; sumSqG += origImg[1][i] * origImg[1][i];
+        sumB += origImg[2][i]; sumSqB += origImg[2][i] * origImg[2][i];
+    }
+
+    double meanR = sumR / size, meanG = sumG / size, meanB = sumB / size;
+    double varR = (sumSqR - (sumR * sumR) / size) / size;
+    double varG = (sumSqG - (sumG * sumG) / size) / size;
+    double varB = (sumSqB - (sumB * sumB) / size) / size;
+
+    double redSSIM   = (2 * meanR * meanColors[0] + c1) * c2 / ((meanR * meanR + meanColors[0] * meanColors[0] + c1) * (varR + c2));
+    double greenSSIM = (2 * meanG * meanColors[1] + c1) * c2 / ((meanG * meanG + meanColors[1] * meanColors[1] + c1) * (varG + c2));
+    double blueSSIM  = (2 * meanB * meanColors[2] + c1) * c2 / ((meanB * meanB + meanColors[2] * meanColors[2] + c1) * (varB + c2));
+
+    return (redSSIM + greenSSIM + blueSSIM) / 3.0;
+}
+bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<int,3>& meanColors, int index, int size) {
     double error;
     switch (runParams.errorMetric) {
         case 1:
@@ -109,6 +140,9 @@ bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<in
             break;
         case 4:
             error = colorEntropy(pixels);
+            break;
+        case 5:
+            error = 1-ssim(runParams.imageBuffer, meanColors,index, size);
             break;
         default:
             cout << "Invalid Error Metric" << endl;

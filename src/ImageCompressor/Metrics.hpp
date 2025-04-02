@@ -30,7 +30,12 @@ double entropy(const vector<int>& values);
 // Entropy of a 3xN matrix of integers
 // where N is the number of pixels and each row is a color channel r,g,b
 double colorEntropy(const RGB& values);
-bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<int,3>& meanColors);
+// Covariance of two vectors of integers
+double singleSsim(const vector<int>& origImg, double mean1, double mean2);
+// Structural Similarity Index (SSIM) of a 3xN matrix of integers
+// where N is the number of pixels and each row is a color channel r,g,b
+double ssim(const RGB& origImg,const array<int,3>& meanColors,int index,int size);
+bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<int,3>& meanColors, int index, int size);
 RGB getRGB(const unsigned char *imgBuf ,int width, int height);
 
 #endif

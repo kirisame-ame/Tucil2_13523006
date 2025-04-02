@@ -22,23 +22,29 @@ void run(){
 void startView(){
     bool isValid = false;
     cout << "Quadtree Image Compressor" << endl;
-    cout << "Enter Absolute File Path of the image that you would like to compress" << endl;    
+    cout << "Enter Absolute File Path of the image that you would like to compress: " << endl;    
     while (!isValid) {
         string imagePath;
         cin >> imagePath;
         if (filesystem::exists(imagePath)) {
             cout << "File exists" << endl;
             runParams.fileSize = filesystem::file_size(imagePath);
-            runParams.imageBuffer = stbi_load(imagePath.c_str(), &runParams.imageWidth, &runParams.imageHeight, NULL, 3);
+            auto imgPix = stbi_load(imagePath.c_str(), &runParams.imageWidth, &runParams.imageHeight, NULL, 3);
+            if (imgPix == nullptr) {
+                cout << "Failed to load image" << endl;
+                return;
+            }
+            runParams.imageBuffer = getRGB(imgPix, runParams.imageWidth, runParams.imageHeight);
             runParams.extension = filesystem::path(imagePath).extension().string();
             isValid = true;
             cout << "Image loaded successfully" << endl;
             cout << "Enter Absolute File Path to save the compressed image" << endl;
-            cout <<"Or press Enter to save in the output directory: " << endl;
+            cout <<"Or type 0 to save in the output directory: " << endl;
             string outputPath;
             cin >> outputPath;
-            if (outputPath.empty()) {
-                runParams.outputPath = "output/"+filesystem::path(imagePath).stem().string()+"_compressed" + runParams.extension;
+            if (outputPath == "0") {
+                cout << "Saving in output directory" << endl;
+                runParams.outputPath = filesystem::current_path().parent_path().string()+"/output/"+filesystem::path(imagePath).stem().string()+"_compressed" + runParams.extension;
             } else {
                 runParams.outputPath = outputPath + runParams.extension;
             }
@@ -61,7 +67,7 @@ void metricInput(){
     cout<< "2. Mean Absolute Deviation" << endl;
     cout<< "3. Max Pixel Difference" << endl;
     cout<< "4. Entropy" << endl;
-    cout<< "5. Structural Similarity Index (SSIM)" << endl;
+    cout<< "5. Structural Similarity Index (SSIM) NOTE: Minimum Threshold" << endl;
     int metric;
     while(!isValid) {
         cin >> metric;

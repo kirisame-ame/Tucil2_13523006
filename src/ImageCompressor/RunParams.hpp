@@ -1,9 +1,9 @@
 #ifndef RUNPARAMS_HPP
 #define RUNPARAMS_HPP
 #include <string>
+using RGB = std::array<std::vector<int>, 3>;
 struct RunParams
 {
-    unsigned char* imageBuffer;
     double threshold;
     int fileSize;
     int imageWidth;
@@ -12,5 +12,6 @@ struct RunParams
     int errorMetric;
     std::string outputPath;
     std::string extension;
+    RGB imageBuffer;
 };
 #endif

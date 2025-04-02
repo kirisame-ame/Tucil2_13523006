@@ -16,9 +16,9 @@ using namespace std;
 void compressImage(const RunParams& runParams) {
     int width = runParams.imageWidth;
     int height = runParams.imageHeight;
-    RGB imgPix = getRGB(runParams.imageBuffer, width, height);
+    RGB imgPix = runParams.imageBuffer;
     array<int,3> meanColors = meanColor(imgPix);
-    if (width*height > runParams.minBlock && passThreshold(runParams, imgPix,meanColors)) {
+    if (width*height > runParams.minBlock && passThreshold(runParams, imgPix,meanColors,0, width*height)) {
         // Create the root node of the quadtree
         unique_ptr<Quadtree> root = make_unique<Quadtree>(0, meanColors, array<int,2>{0,0}, array<int,2>{width,height});
         // Build the quadtree
@@ -40,7 +40,7 @@ void compressImage(const RunParams& runParams) {
 }
 void saveCompressedImage(const unique_ptr<Quadtree>& root, const string& path,int width, int height,string extension,double origSize) {
     unsigned char* output = new unsigned char[width * height * 3];
-    int maxDepth;
+    int maxDepth=0;
     int nodeCount = 0;
     root->constructImage(output, width, &maxDepth, &nodeCount);
     if (extension == ".png") {

@@ -31,7 +31,7 @@ void Quadtree::buildQuadtree(const RunParams& runParams,int x,int y,int width,in
     if (width * height <= runParams.minBlock) {
         return;
     }
-    if (passThreshold(runParams, pixels,meanColors)) {
+    if (passThreshold(runParams, pixels,meanColors,y*runParams.imageWidth+x,width*height)) {
         this->isLeaf = false;
         this->tl = make_unique<Quadtree>(depth + 1, array<int,3>{0,0,0}, array<int,2>{x,y}, array<int,2>{width/2,height/2});
         this->tr = make_unique<Quadtree>(depth + 1, array<int,3>{0,0,0}, array<int,2>{x+width/2,y}, array<int,2>{width-width/2,height/2});
