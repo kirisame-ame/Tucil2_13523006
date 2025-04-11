@@ -14,7 +14,7 @@ const array<int,3>& Quadtree::getColor() {
 bool Quadtree::getIsLeaf() {
     return isLeaf;
 }
-void Quadtree::buildQuadtree(const RunParams& runParams,int x,int y,int width,int height,int depth,RGB& imgPix) {
+void Quadtree::buildQuadtree(const RunParams& runParams,int x,int y,int width,int height,int depth,RGB& imgPix,double threshold) {
     RGB pixels;
     pixels[0].resize(width*height);
     pixels[1].resize(width*height);
@@ -28,19 +28,24 @@ void Quadtree::buildQuadtree(const RunParams& runParams,int x,int y,int width,in
     }
     array<int,3> meanColors = meanColor(pixels);
     this->color = meanColors;
-    if (width * height <= runParams.minBlock) {
+    if (width * height <= runParams.minBlock|| width <= 1 || height <= 1) {
+        this->isLeaf = true;
+        this->tl = nullptr;
+        this->tr = nullptr;
+        this->bl = nullptr;
+        this->br = nullptr;
         return;
     }
-    if (passThreshold(runParams, pixels,meanColors,y*runParams.imageWidth+x,width*height)) {
+    if (passThreshold(runParams, pixels,meanColors,y*runParams.imageWidth+x,width*height,threshold)) {
         this->isLeaf = false;
         this->tl = make_unique<Quadtree>(depth + 1, array<int,3>{0,0,0}, array<int,2>{x,y}, array<int,2>{width/2,height/2});
         this->tr = make_unique<Quadtree>(depth + 1, array<int,3>{0,0,0}, array<int,2>{x+width/2,y}, array<int,2>{width-width/2,height/2});
         this->bl = make_unique<Quadtree>(depth + 1, array<int,3>{0,0,0}, array<int,2>{x,y+height/2}, array<int,2>{width/2,height-height/2});
         this->br = make_unique<Quadtree>(depth + 1, array<int,3>{0,0,0}, array<int,2>{x+width/2,y+height/2}, array<int,2>{width-width/2, height-height/2});
-        this->tl->buildQuadtree(runParams, x, y, width/2, height/2, depth + 1,imgPix);
-        this->tr->buildQuadtree(runParams, x + width/2, y, width-width/2, height/2, depth + 1,imgPix);
-        this->bl->buildQuadtree(runParams, x, y + height/2, width/2, height-height/2, depth + 1,imgPix);
-        this->br->buildQuadtree(runParams, x + width/2, y + height/2, width-width/2, height-height/2, depth + 1,imgPix);
+        this->tl->buildQuadtree(runParams, x, y, width/2, height/2, depth + 1,imgPix,threshold);
+        this->tr->buildQuadtree(runParams, x + width/2, y, width-width/2, height/2, depth + 1,imgPix,threshold);
+        this->bl->buildQuadtree(runParams, x, y + height/2, width/2, height-height/2, depth + 1,imgPix,threshold);
+        this->br->buildQuadtree(runParams, x + width/2, y + height/2, width-width/2, height-height/2, depth + 1,imgPix,threshold);
     } else {
         this->isLeaf = true;
         this->tl = nullptr;

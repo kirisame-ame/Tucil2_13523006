@@ -10,6 +10,7 @@ struct RunParams
     int imageHeight;
     int minBlock;
     int errorMetric;
+    int isAutoThreshold;
     std::string outputPath;
     std::string extension;
     RGB imageBuffer;

@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin",
+  "command": "C:\\MinGW\\bin\\c++.exe -IC:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/src/ImageCompressor -g -std=gnu++17 -o CMakeFiles\\Main.dir\\src\\main.cpp.obj -c C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\main.cpp",
+  "file": "C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\main.cpp",
+  "output": "CMakeFiles\\Main.dir\\src\\main.cpp.obj"
+},
+{
+  "directory": "C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin",
+  "command": "C:\\MinGW\\bin\\c++.exe -IC:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/src/ImageCompressor -g -std=gnu++17 -o src\\CMakeFiles\\ImageCompressorLib.dir\\ImageCompressor\\ImageCompressor.cpp.obj -c C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\ImageCompressor\\ImageCompressor.cpp",
+  "file": "C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\ImageCompressor\\ImageCompressor.cpp",
+  "output": "src\\CMakeFiles\\ImageCompressorLib.dir\\ImageCompressor\\ImageCompressor.cpp.obj"
+},
+{
+  "directory": "C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin",
+  "command": "C:\\MinGW\\bin\\c++.exe -IC:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/src/ImageCompressor -g -std=gnu++17 -o src\\CMakeFiles\\ImageCompressorLib.dir\\ImageCompressor\\Metrics.cpp.obj -c C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\ImageCompressor\\Metrics.cpp",
+  "file": "C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\ImageCompressor\\Metrics.cpp",
+  "output": "src\\CMakeFiles\\ImageCompressorLib.dir\\ImageCompressor\\Metrics.cpp.obj"
+},
+{
+  "directory": "C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin",
+  "command": "C:\\MinGW\\bin\\c++.exe -IC:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/src/ImageCompressor -g -std=gnu++17 -o src\\CMakeFiles\\ImageCompressorLib.dir\\ImageCompressor\\Quadtree.cpp.obj -c C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\ImageCompressor\\Quadtree.cpp",
+  "file": "C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\ImageCompressor\\Quadtree.cpp",
+  "output": "src\\CMakeFiles\\ImageCompressorLib.dir\\ImageCompressor\\Quadtree.cpp.obj"
+},
+{
+  "directory": "C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin",
+  "command": "C:\\MinGW\\bin\\c++.exe -IC:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/src/ImageCompressor -g -std=gnu++17 -o src\\CMakeFiles\\ImageCompressorLib.dir\\ImageCompressor\\View.cpp.obj -c C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\ImageCompressor\\View.cpp",
+  "file": "C:\\Users\\Warge\\Documents\\Kuliah\\sem_4\\stima\\Tucil2_13523006\\src\\ImageCompressor\\View.cpp",
+  "output": "src\\CMakeFiles\\ImageCompressorLib.dir\\ImageCompressor\\View.cpp.obj"
+}
+]

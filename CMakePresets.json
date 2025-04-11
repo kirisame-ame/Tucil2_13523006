@@ -5,8 +5,8 @@
          "name":"default",
          "description": "default settings",
          "hidden": false,
-         "generator": "MinGW Makefiles",
-         "binaryDir": "${workspaceFolder}/build",
+         "generator": "Ninja",
+         "binaryDir": "${workspaceFolder}/bin",
          "cacheVariables": {
             "CMAKE_BUILD_TYPE":"Debug",
             "CMAKE_EXPORT_COMPILE_COMMANDS":"YES"

@@ -1,0 +1,6 @@
+C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin/CMakeFiles/Main.dir
+C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin/CMakeFiles/edit_cache.dir
+C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin/CMakeFiles/rebuild_cache.dir
+C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin/src/CMakeFiles/ImageCompressorLib.dir
+C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin/src/CMakeFiles/edit_cache.dir
+C:/Users/Warge/Documents/Kuliah/sem_4/stima/Tucil2_13523006/bin/src/CMakeFiles/rebuild_cache.dir

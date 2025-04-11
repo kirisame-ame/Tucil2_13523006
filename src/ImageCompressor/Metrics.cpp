@@ -126,7 +126,7 @@ double ssim(const RGB& origImg,const array<int,3>& meanColors,int index,int size
 
     return (redSSIM + greenSSIM + blueSSIM) / 3.0;
 }
-bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<int,3>& meanColors, int index, int size) {
+bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<int,3>& meanColors, int index, int size,double threshold) {
     double error;
     switch (runParams.errorMetric) {
         case 1:
@@ -148,7 +148,7 @@ bool passThreshold(const RunParams& runParams, const RGB& pixels, const array<in
             cout << "Invalid Error Metric" << endl;
             return false;
     }
-    return error > runParams.threshold;
+    return error > threshold;
 }
 RGB getRGB(const unsigned char* imgBuf,int width, int height) {
     RGB pixels;

@@ -4,6 +4,7 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
+#include <chrono>
 #include <ImageCompressor.hpp>
 #include <stb_image.h>
 #include <stb_image_write.h>
