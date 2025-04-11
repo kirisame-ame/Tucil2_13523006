@@ -96,13 +96,6 @@ double colorEntropy(const RGB& values){
     vector<int> b = values[2];
     return (entropy(r) + entropy(g) + entropy(b))/3;
 }
-double singleSsim(const vector<int>& origImg, double mean1, double mean2) {
-    double c1 = 6.5025, c2 = 58.5225;
-    double origImgVar = variance(origImg, mean1);
-    // Covariance is zero since newImg's pixels are all the same
-    // Variance of newImg is zero since newImg's pixels are all the same
-    return (2 * mean1 * mean2 + c1) * c2 / ((mean1 * mean1 + mean2 * mean2 + c1) * (origImgVar + c2));
-}
 double ssim(const RGB& origImg,const array<int,3>& meanColors,int index,int size) {
     double c1 = 6.5025, c2 = 58.5225;
     

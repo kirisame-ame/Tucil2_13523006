@@ -110,18 +110,13 @@ void thresholdCompression(const RunParams& runParams,double compRatio) {
         cout<<"Invalid error metric"<<endl;
         return;
     }
-    
     double bestThreshold = low;
     double tolerance = 0.01;
-
     int width = runParams.imageWidth;
     int height = runParams.imageHeight;
     RGB imgPix = runParams.imageBuffer;
-
     string tempOutput = runParams.outputPath + ".tmp" + runParams.extension;
-
     unique_ptr<Quadtree> root;
-
     for (int i = 0; i < 12; ++i) { // log2(4096) ~= 12 steps max
         double mid = (low + high) / 2.0;
         double threshold = mid;

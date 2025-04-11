@@ -2,13 +2,7 @@
 12	950	7660762630425265	src/CMakeFiles/ImageCompressorLib.dir/ImageCompressor/Metrics.cpp.obj	db36073c5fa66355
 16	1011	7660762631045586	src/CMakeFiles/ImageCompressorLib.dir/ImageCompressor/Quadtree.cpp.obj	75c00405b2d75ec
 4	1095	7660762631900876	CMakeFiles/Main.dir/src/main.cpp.obj	c732c022630ca6cf
-8	1402	7660762634696739	src/CMakeFiles/ImageCompressorLib.dir/ImageCompressor/ImageCompressor.cpp.obj	44a530790d089824
-20	2432	7660762645244236	src/CMakeFiles/ImageCompressorLib.dir/ImageCompressor/View.cpp.obj	fd52393501ea29e7
-2433	2621	7660762647154809	src/libImageCompressorLib.a	443dfaad0e7801c7
-2621	2864	7660762649315431	Main.exe	d38ead14a09a7295
-8	1312	7660768895268808	src/CMakeFiles/ImageCompressorLib.dir/ImageCompressor/ImageCompressor.cpp.obj	44a530790d089824
-1313	1524	7660768897509569	src/libImageCompressorLib.a	443dfaad0e7801c7
-1524	1758	7660768899765105	Main.exe	d38ead14a09a7295
-31	1329	7660777015923188	src/CMakeFiles/ImageCompressorLib.dir/ImageCompressor/ImageCompressor.cpp.obj	44a530790d089824
-1330	1541	7660777018038775	src/libImageCompressorLib.a	443dfaad0e7801c7
 1541	1789	7660777020434110	Main.exe	d38ead14a09a7295
+31	1329	7660777015923188	src/CMakeFiles/ImageCompressorLib.dir/ImageCompressor/ImageCompressor.cpp.obj	44a530790d089824
+20	2432	7660762645244236	src/CMakeFiles/ImageCompressorLib.dir/ImageCompressor/View.cpp.obj	fd52393501ea29e7
+1330	1541	7660777018038775	src/libImageCompressorLib.a	443dfaad0e7801c7
